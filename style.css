@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.inicio {
+    background-color: #e5f5e8;
+    padding: 80px 20px;
+}
+
+.inicio h1 {
+    color: #198754;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.inicio p {
+    font-size: 18px;
+}
+
+h2 {
+    color: #198754;
+    margin-bottom: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+}
+
+.card h5 {
+    color: #0350c4;
+}
+
+.formulario {
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+footer {
+    margin-top: 30px;
+}
