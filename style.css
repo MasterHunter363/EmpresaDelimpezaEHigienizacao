@@ -1,15 +1,16 @@
+
 body {
     font-family: Arial, sans-serif;
     color: #333;
 }
 
 .inicio {
-    background-color: #e5f5e8;
+    background-color: #045ec4;
     padding: 80px 20px;
 }
 
 .inicio h1 {
-    color: #198754;
+    color: #027ec5;
     font-size: 36px;
     margin-bottom: 20px;
 }
@@ -19,12 +20,12 @@ body {
 }
 
 h2 {
-    color: #198754;
+    color: #0492ca;
     margin-bottom: 20px;
 }
 
 .card {
-    border: 1px solid #ddd;
+    border: 1px solid #004aaa;
 }
 
 .card h5 {

@@ -1,10 +1,4 @@
-<?php
-require("conexao.php");
-
-$sql = "SELECT * FROM servicos";
-$resultado = mysqli_query($conexao, $sql);
-?>
-
+<html>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -22,7 +16,9 @@ $resultado = mysqli_query($conexao, $sql);
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="index.php">EmpresaDeLimpezaEHigienizacao</a>
+            <a class="navbar-brand" href="index.php">
+                EmpresaDeLimpezaEHigienizacao
+            </a>
 
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="#inicio">Início</a>
@@ -36,7 +32,9 @@ $resultado = mysqli_query($conexao, $sql);
         <div class="container">
             <h1>Limpeza e Higienização</h1>
             <p>Deixamos seu ambiente limpo e agradável!</p>
-            <a href="#contato" class="btn btn-primary">Peça seu orçamento</a>
+            <a href="#contato" class="btn btn-primary">
+                Peça seu orçamento
+            </a>
         </div>
     </section>
 
@@ -44,10 +42,12 @@ $resultado = mysqli_query($conexao, $sql);
         <h2>Sobre nós</h2>
 
         <p>
-            A Empresa de Limpeza é especializada em serviços de limpeza e higienização de ambientes
-            residenciais e comerciais. Nosso objetivo é oferecer qualidade, organização e cuidado, garantindo espaços
-            mais limpos, agradáveis e seguros para nossos clientes. Trabalhamos com dedicação e responsabilidade para
-            proporcionar satisfação e confiança em cada serviço realizado.
+            A Empresa de Limpeza é especializada em serviços de limpeza
+            e higienização de ambientes residenciais e comerciais.
+            Nosso objetivo é oferecer qualidade, organização e cuidado,
+            garantindo espaços mais limpos, agradáveis e seguros para
+            nossos clientes. Trabalhamos com dedicação e responsabilidade
+            para proporcionar satisfação e confiança em cada serviço realizado.
         </p>
     </section>
 
@@ -57,32 +57,59 @@ $resultado = mysqli_query($conexao, $sql);
 
             <div class="row">
 
-                <?php while ($servico = mysqli_fetch_assoc($resultado)) { ?>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Limpeza residencial</h5>
 
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5>
-                                    <?php echo htmlspecialchars($servico["nome"]); ?>
-                                </h5>
+                            <p>Limpeza de casas e apartamentos.</p>
 
-                                <p>
-                                    <?php echo htmlspecialchars($servico["descricao"]); ?>
-                                </p>
+                            <p class="text-success">
+                                A partir de R$ 150,00
+                            </p>
 
-                                <p class="text-success">
-                                    A partir de R$
-                                    <?php echo number_format($servico["preco"], 2, ',', '.'); ?>
-                                </p>
-
-                                <a href="#contato" class="btn btn-primary">
-                                    Solicitar orçamento
-                                </a>
-                            </div>
+                            <a href="#contato" class="btn btn-primary">
+                                Solicitar orçamento
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                <?php } ?>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Limpeza comercial</h5>
+
+                            <p>Limpeza de lojas e escritórios.</p>
+
+                            <p class="text-success">
+                                A partir de R$ 200,00
+                            </p>
+
+                            <a href="#contato" class="btn btn-primary">
+                                Solicitar orçamento
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5>Higienização</h5>
+
+                            <p>Higienização de ambientes.</p>
+
+                            <p class="text-success">
+                                A partir de R$ 100,00
+                            </p>
+
+                            <a href="#contato" class="btn btn-primary">
+                                Solicitar orçamento
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -103,6 +130,7 @@ $resultado = mysqli_query($conexao, $sql);
             <input type="text" name="telefone" class="form-control mb-3" required>
 
             <label class="form-label">Serviço desejado</label>
+
             <select name="assunto" class="form-select mb-3" required>
                 <option value="">Selecione</option>
                 <option value="Limpeza residencial">Limpeza residencial</option>
@@ -111,7 +139,8 @@ $resultado = mysqli_query($conexao, $sql);
             </select>
 
             <label class="form-label">Mensagem</label>
-            <textarea name="mensagem" class="form-control mb-3" rows="4" required></textarea>
+            <textarea name="mensagem" class="form-control mb-3"
+                rows="4" required></textarea>
 
             <button type="submit" class="btn btn-primary">
                 Enviar

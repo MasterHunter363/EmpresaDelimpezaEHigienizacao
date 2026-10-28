@@ -3,13 +3,15 @@ $conexao = mysqli_connect(
     "localhost",
     "root",
     "",
-    "EmpresaDeLimpezaEHigienizacao",
+    "empresadelimpezaehigienizacao",
     3307
 );
 
 if (!$conexao) {
-    die("Erro na conexão: " . mysqli_connect_error());
+    die("Não foi possível conectar ao banco de dados: "
+        . mysqli_connect_error());
 }
 
 mysqli_set_charset($conexao, "utf8mb4");
+
 ?>
