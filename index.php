@@ -1,4 +1,11 @@
-<html>
+
+<?php
+require("conexao.php");
+
+$sql = "SELECT * FROM servicos";
+$resultado = mysqli_query($conexao, $sql);
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -6,153 +13,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EmpresaDeLimpezaEHigienizacao</title>
+    <title>Empresa de Limpeza e Higienização</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+    <!-- MENU -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="index.php">
+
+            <a class="navbar-brand" href="#inicio">
                 EmpresaDeLimpezaEHigienizacao
             </a>
 
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="#inicio">Início</a>
-                <a class="nav-link" href="#servicos">Serviços</a>
-                <a class="nav-link" href="#contato">Contato</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobre">Sobre nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servicos">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contato">Contato</a>
+                    </li>
+                </ul>
             </div>
+
         </div>
     </nav>
 
-    <section id="inicio" class="inicio text-center">
+    <!-- INÍCIO -->
+    <section id="inicio">
         <div class="container">
             <h1>Limpeza e Higienização</h1>
+
             <p>Deixamos seu ambiente limpo e agradável!</p>
-            <a href="#contato" class="btn btn-primary">
-                Peça seu orçamento
+
+            <a href="#contato" class="btn btn-primary btn-lg">
+                Entre em contato
             </a>
         </div>
     </section>
 
-    <section id="sobre" class="container py-5">
-        <h2>Sobre nós</h2>
+    <!-- SOBRE NÓS -->
+    <section id="sobre" class="container secao">
+        <div class="row align-items-center">
 
-        <p>
-            A Empresa de Limpeza é especializada em serviços de limpeza
-            e higienização de ambientes residenciais e comerciais.
-            Nosso objetivo é oferecer qualidade, organização e cuidado,
-            garantindo espaços mais limpos, agradáveis e seguros para
-            nossos clientes. Trabalhamos com dedicação e responsabilidade
-            para proporcionar satisfação e confiança em cada serviço realizado.
-        </p>
+            <div class="col-md-6">
+                <h2>Sobre nós</h2>
+
+                <p>
+                    A Empresa de Limpeza e Higienização oferece serviços
+                    de limpeza para residências e estabelecimentos comerciais.
+                    Nosso objetivo é proporcionar ambientes limpos, organizados
+                    e agradáveis para nossos clientes.
+                </p>
+            </div>
+
+            <div class="col-md-6">
+                <a href="https://unsplash.com/s/photos/cleaning" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80"
+                        alt="Profissionais realizando serviços de limpeza" class="img-fluid rounded imagem-sobre">
+                </a>
+            </div>
+
+        </div>
     </section>
 
-    <section id="servicos" class="py-5 bg-light">
+    <!-- SERVIÇOS -->
+    <section id="servicos" class="secao-servicos">
         <div class="container">
+
             <h2 class="text-center mb-4">Nossos serviços</h2>
 
             <div class="row">
 
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5>Limpeza residencial</h5>
+                <?php if ($resultado && mysqli_num_rows($resultado) > 0) { ?>
 
-                            <p>Limpeza de casas e apartamentos.</p>
+                    <?php while ($servico = mysqli_fetch_assoc($resultado)) { ?>
 
-                            <p class="text-success">
-                                A partir de R$ 150,00
-                            </p>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
 
-                            <a href="#contato" class="btn btn-primary">
-                                Solicitar orçamento
-                            </a>
+                                <?php
+                                $nomeServico = strtolower($servico['nome']);
+
+                                if (strpos($nomeServico, 'residencial') !== false) {
+                                    $imagem = 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=700&q=80';
+                                    $referencia = 'https://unsplash.com/s/photos/house-cleaning';
+                                    $descricaoImagem = 'Limpeza residencial';
+                                } elseif (strpos($nomeServico, 'comercial') !== false) {
+                                    $imagem = 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=700&q=80';
+                                    $referencia = 'https://unsplash.com/s/photos/office-cleaning';
+                                    $descricaoImagem = 'Ambiente comercial';
+                                } else {
+                                    $imagem = 'https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=700&q=80';
+                                    $referencia = 'https://unsplash.com/s/photos/cleaning';
+                                    $descricaoImagem = 'Serviço de higienização';
+                                }
+                                ?>
+
+                                <a href="<?php echo $referencia; ?>" target="_blank" rel="noopener noreferrer">
+                                    <img src="<?php echo $imagem; ?>" alt="<?php echo $descricaoImagem; ?>"
+                                        class="card-img-top imagem-servico">
+                                </a>
+
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">
+                                        <?php echo htmlspecialchars($servico['nome']); ?>
+                                    </h5>
+
+                                    <p class="card-text">
+                                        <?php echo htmlspecialchars($servico['descricao']); ?>
+                                    </p>
+
+                                    <p class="preco">
+                                        R$
+                                        <?php echo number_format($servico['preco'], 2, ',', '.'); ?>
+                                    </p>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5>Limpeza comercial</h5>
+                    <?php } ?>
 
-                            <p>Limpeza de lojas e escritórios.</p>
+                <?php } else { ?>
 
-                            <p class="text-success">
-                                A partir de R$ 200,00
-                            </p>
+                    <p class="text-center">
+                        Nenhum serviço cadastrado no momento.
+                    </p>
 
-                            <a href="#contato" class="btn btn-primary">
-                                Solicitar orçamento
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5>Higienização</h5>
-
-                            <p>Higienização de ambientes.</p>
-
-                            <p class="text-success">
-                                A partir de R$ 100,00
-                            </p>
-
-                            <a href="#contato" class="btn btn-primary">
-                                Solicitar orçamento
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
 
             </div>
         </div>
     </section>
 
-    <section id="contato" class="container py-5">
-        <h2 class="text-center">Entre em contato</h2>
+    <!-- CONTATO -->
+    <section id="contato" class="container secao">
+        <h2 class="text-center mb-4">Entre em contato</h2>
 
-        <form action="cadastroContato.php" method="POST" class="formulario">
+        <form action="cadastroContato.php" method="POST">
 
-            <label class="form-label">Nome</label>
-            <input type="text" name="nome" class="form-control mb-3" required>
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control" required>
+            </div>
 
-            <label class="form-label">E-mail</label>
-            <input type="email" name="email" class="form-control mb-3" required>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+            </div>
 
-            <label class="form-label">Telefone</label>
-            <input type="text" name="telefone" class="form-control mb-3" required>
+            <div class="mb-3">
+                <label for="telefone" class="form-label">Telefone</label>
+                <input type="text" name="telefone" id="telefone" class="form-control" required>
+            </div>
 
-            <label class="form-label">Serviço desejado</label>
+            <div class="mb-3">
+                <label for="assunto" class="form-label">Assunto</label>
+                <input type="text" name="assunto" id="assunto" class="form-control" required>
+            </div>
 
-            <select name="assunto" class="form-select mb-3" required>
-                <option value="">Selecione</option>
-                <option value="Limpeza residencial">Limpeza residencial</option>
-                <option value="Limpeza comercial">Limpeza comercial</option>
-                <option value="Higienização">Higienização</option>
-            </select>
-
-            <label class="form-label">Mensagem</label>
-            <textarea name="mensagem" class="form-control mb-3"
-                rows="4" required></textarea>
-
-            <button type="submit" class="btn btn-primary">
-                Enviar
-            </button>
-
-        </form>
-    </section>
-
-    <footer class="bg-primary text-white text-center p-3">
-        <p>Empresa de Limpeza e Higienização</p>
-    </footer>
-
-</body>
-
-</html>
+            <div class="mb-3">
+                <label
+ 
